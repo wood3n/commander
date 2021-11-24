@@ -21,7 +21,7 @@ esbuild
       '.ts': 'ts',
     },
     plugins: [startPlugin, nodeExternalsPlugin()],
-    outfile: 'build/index.js',
+    outfile: 'lib/index.js',
     minify: true,
     watch: {
       onRebuild(error, result) {
