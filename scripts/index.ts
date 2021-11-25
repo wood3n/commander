@@ -5,7 +5,7 @@ import fs from 'fs';
 import { homedir } from 'os';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
-import { getCache, setCache, clearCache } from './cache';
+import cowsay from 'cowsay';
 import { generateSign } from './utils';
 import packageJson from '../package.json';
 
@@ -31,8 +31,9 @@ async function translate(query: string, appKey: string, secret: string) {
 }
 
 function readConfig() {
-  if (fs.existsSync(USER_CONFIG_PATH)) {
-    const file = fs.readFileSync(`${USER_CONFIG_PATH}${path.sep}config.json`, 'utf8');
+  const filename = `${USER_CONFIG_PATH}${path.sep}config.json`;
+  if (fs.existsSync(filename)) {
+    const file = fs.readFileSync(filename, 'utf8');
 
     if (file) {
       return JSON.parse(file);
@@ -51,55 +52,55 @@ function writeConfig(appKey: string, secret: string) {
     `${USER_CONFIG_PATH}${path.sep}config.json`,
     JSON.stringify({ appKey, secret }),
     'utf8',
-    () => {
-      // 缓存appKey以及secret
-      setCache(appKey, secret);
-    }
+    () => {}
   );
 }
 
 function removeConfig() {
   fs.rm(`${USER_CONFIG_PATH}${path.sep}config.json`, { force: true }, () => {
-    clearCache();
     process.exit(1);
   });
 }
 
 function startTranslate(query: string) {
   // 首先从缓存获取appkey和secret
-  let appKey = getCache('appKey') || readConfig()?.appKey;
-  let secret = getCache('secret') || readConfig()?.secret;
+  let appKey = readConfig()?.appKey;
+  let secret = readConfig()?.secret;
 
   // 从命令行获取appKey和secret
   if (!appKey || !secret) {
+    console.log(chalk.blue(cowsay.say({
+      text : "Thanks for using tlt, confirm that you have registered your own application in youdao translation public service, the address is https://ai.youdao.com/gw.s#/",
+      e : "oO",
+      T : "U "
+    })));
     inquirer
       .prompt([
         {
-          type: 'input',
+          type: 'password',
           name: 'appKey',
           message: 'youdao translation service appKey',
         },
         {
-          type: 'input',
+          type: 'password',
           name: 'secret',
           message: 'youdao translation service secret',
         },
       ])
       .then(({ appKey, secret }) => {
+        console.log(chalk.green('配置完成'));
         // 开始翻译
         translate(query, appKey, secret)
           .then((res) => {
             // 写入配置
             writeConfig(appKey, secret);
-            console.log(chalk.green(`🎉🎉🎉${res?.data?.translation?.[0] ?? '未查询到翻译结果'}`));
+            console.log(chalk.green(`${res?.data?.translation?.[0] ?? '未查询到翻译结果'}`));
           })
           .catch((err) => console.log(err));
-
-        // console.log(chalk.green('🖖配置完成🖖'));
       });
   } else {
     translate(query, appKey, secret).then((res) => {
-      console.log(chalk.green(`🎉🎉🎉${res?.data?.translation?.[0] ?? '未查询到翻译结果'}`));
+      console.log(chalk.green(`${res?.data?.translation?.[0] ?? '未查询到翻译结果'}`));
     });
   }
 }
