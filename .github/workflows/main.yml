@@ -26,7 +26,6 @@ jobs:
         with:
           node-version: '>=16.13'
           registry-url: https://registry.npmjs.org/
-          cache: npm
       - name: install dependencies
         run: npm install
       - name: build file
