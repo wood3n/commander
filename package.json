@@ -25,8 +25,8 @@
 	},
 	"bin": "./bin/trt.js",
 	"scripts": {
-		"dev": "ts-node scripts/index.ts",
-		"build": "node esbuild.config"
+		"dev": "node ./config/esbuild.dev.config",
+		"build": "node ./config/esbuild.pro.config"
 	},
 	"devDependencies": {
 		"@types/inquirer": "^8.1.3",
