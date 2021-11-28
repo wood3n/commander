@@ -1,36 +1,36 @@
 {
-	"name": "trt",
-	"description": "a translation tool can be used in cli",
-	"version": "1.1.0",
-	"homepage": "https://github.com/wood3n/tlt#readme",
-	"repository": "https://github.com/wood3n/tlt.git",
-	"author": "wood3n <wangkka1@163.com>",
-	"license": "MIT",
-	"files": [
-		"lib/*.js"
-	],
-	"engines": {
-		"node": ">=16.13"
-	},
-	"dependencies": {
-		"axios": "^0.24.0",
-		"chalk": "^4.1.2",
-		"commander": "^8.3.0",
-		"cowsay": "^1.5.0",
-		"esbuild": "^0.13.15",
-		"inquirer": "^8.2.0",
-		"please-upgrade-node": "^3.2.0",
-		"ts-node": "^10.4.0",
-		"typescript": "^4.5.2"
-	},
-	"bin": "./bin/trt.js",
-	"scripts": {
-		"dev": "node ./config/esbuild.dev.config",
-		"build": "node ./config/esbuild.pro.config"
-	},
-	"devDependencies": {
-		"@types/inquirer": "^8.1.3",
-		"@types/node": "^16.11.9",
-		"esbuild-node-externals": "^1.4.0"
-	}
+    "name": "trt",
+    "description": "a translation tool can be used in cli",
+    "version": "1.2.0",
+    "homepage": "https://github.com/wood3n/tlt#readme",
+    "repository": "https://github.com/wood3n/tlt.git",
+    "author": "wood3n <wangkka1@163.com>",
+    "license": "MIT",
+    "files": [
+        "lib/*.js"
+    ],
+    "engines": {
+        "node": ">=16.13"
+    },
+    "dependencies": {
+        "axios": "^0.24.0",
+        "chalk": "^4.1.2",
+        "commander": "^8.3.0",
+        "cowsay": "^1.5.0",
+        "esbuild": "^0.13.15",
+        "inquirer": "^8.2.0",
+        "please-upgrade-node": "^3.2.0",
+        "ts-node": "^10.4.0",
+        "typescript": "^4.5.2"
+    },
+    "bin": "./bin/trt.js",
+    "scripts": {
+        "dev": "node ./config/esbuild.dev.config",
+        "build": "node ./config/esbuild.pro.config"
+    },
+    "devDependencies": {
+        "@types/inquirer": "^8.1.3",
+        "@types/node": "^16.11.9",
+        "esbuild-node-externals": "^1.4.0"
+    }
 }
