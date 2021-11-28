@@ -38,7 +38,7 @@ jobs:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     # 更新 github release 信息
     release:
-        needs: build
+        needs: publish
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
