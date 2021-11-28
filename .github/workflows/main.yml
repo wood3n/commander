@@ -42,7 +42,7 @@ jobs:
               run: npm publish
               # 指定 npm auth token
               env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH }}
+                  NPM_PUBLISH: ${{ secrets.NPM_PUBLISH }}
     # 更新 github release 信息
     release:
         needs: publish
