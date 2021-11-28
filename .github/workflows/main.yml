@@ -12,7 +12,7 @@ on:
 
 jobs:
     # 构建
-    build:
+    publish:
         runs-on: ubuntu-latest
 
         # Steps represent a sequence of tasks that will be executed as part of the job
@@ -46,3 +46,7 @@ jobs:
               uses: release-drafter/release-drafter@v5
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  template: |
+                      # What's Changed
+                      $CHANGES
