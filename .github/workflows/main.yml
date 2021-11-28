@@ -30,13 +30,6 @@ jobs:
               run: npm install
             - name: build file
               run: npm run build
-    # 发布
-    publish:
-        needs: build
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-
             # 执行 npm publish 发布
             - name: publish package
               run: npm publish
@@ -45,7 +38,7 @@ jobs:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     # 更新 github release 信息
     release:
-        needs: publish
+        needs: build
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
